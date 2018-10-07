@@ -1,0 +1,27 @@
+{ "name": "read-data-file",
+  "version": "1.0.0",
+  "description": "Alias for require('fs-read-data').readFile, which promises to read and parse one data file (json, js, yaml, ini, toml).",
+  "keywords": [],
+
+  "author": "M.K. (https://github.com/mk-pmb)",
+  "homepage": "https://github.com/mk-pmb/read-data-file-node/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mk-pmb/read-data-file-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mk-pmb/read-data-file-node/issues"
+  },
+  "contributors": [],
+
+  "private": false, "license": "ISC",
+  "main": "alias.js",
+  "dependencies": {
+    "fs-read-data": "^1.0.4"
+  },
+  "devDependencies": {
+  },
+
+
+  "npm vs. BOM = Unexpected token": "-*- coding: UTF-8 -*-"
+}
