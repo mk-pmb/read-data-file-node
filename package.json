@@ -1,7 +1,10 @@
 { "name": "read-data-file",
-  "version": "1.0.0",
-  "description": "Alias for require('fs-read-data').readFile, which promises to read and parse one data file (json, js, yaml, ini, toml).",
-  "keywords": [],
+  "version": "1.0.1",
+  "description": "Alias for require('fs-read-data').readFile, which promises to read and parse one data file (json, js, yaml, ini, toml). Made to help npm understand what I mean when I search for \"read data file\".",
+  "keywords": [
+    "read data file",
+    "read", "data", "file"
+  ],
 
   "author": "M.K. (https://github.com/mk-pmb)",
   "homepage": "https://github.com/mk-pmb/read-data-file-node/#readme",
