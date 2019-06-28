@@ -1,5 +1,5 @@
 { "name": "read-data-file",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Alias for require('fs-read-data').readFile, which promises to read and parse one data file (json, js, yaml, ini, toml). Made to help npm understand what I mean when I search for \"read data file\".",
   "keywords": [
     "read data file",

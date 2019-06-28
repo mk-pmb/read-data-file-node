@@ -6,7 +6,8 @@ read-data-file
 
 <!--#echo json="package.json" key="description" -->
 Alias for require(&#39;fs-read-data&#39;).readFile, which promises to read and
-parse one data file (json, js, yaml, ini, toml).
+parse one data file (json, js, yaml, ini, toml). Made to help npm understand
+what I mean when I search for &quot;read data file&quot;.
 <!--/#echo -->
 
 
