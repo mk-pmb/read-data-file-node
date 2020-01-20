@@ -24,6 +24,10 @@ This module exports one function:
 ### readDataFile(path)
 
 Return a promise for data read from the file at path `path`.
+If no reader and parser can be determined from config, the promise will be
+rejected with error name `ReadDataFileUnsupportedFext`.
+
+
 
 ### readDataFile.cfg(opts)
 
