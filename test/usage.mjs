@@ -33,13 +33,15 @@ async function verifyAllFixtures() {
 
   await verifyOneFixture('cats.ceson');
   await verifyOneFixture('cats.ini');
+  await verifyOneFixture('cats.json.gz');
   await verifyOneFixture('cats.json5');
   await verifyOneFixture('cats.toml');
+  await verifyOneFixture('cats.yaml.gz');
   await verifyOneFixture('cats.yaml');
   await verifyOneFixture('cats.yml');
 
   const noIni = readDataFile.cfg({ parsersByFext: { ini: false } });
-  await shouldReject(verifyOneFixture('cats.ini', noIni)).then(rej => {
+  await shouldReject(verifyOneFixture('cats.ini', noIni)).then((rej) => {
     equal(rej.name, 'ReadDataFileUnsupportedFext');
     console.log('+OK ini parser disabled');
   });
