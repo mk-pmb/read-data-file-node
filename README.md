@@ -9,6 +9,13 @@ Read data/config files in various formats (parsers list is configurable).
 <!--/#echo -->
 
 
+Usage
+-----
+
+see [test/usage.mjs](test/usage.mjs)
+
+
+
 API
 ---
 
@@ -68,10 +75,7 @@ Default parsers:
 
 
 
-Usage
------
 
-see [test/usage.js](test/usage.js)
 
 
 <!--#toc stop="scan" -->
