@@ -81,7 +81,7 @@ see [test/usage.js](test/usage.js)
 Known issues
 ------------
 
-* v1.x was an alias for `require(&#39;fs-read-data&#39;).readFile`,
+* v1.x was an alias for `require('fs-read-data').readFile`,
   but that package turned out to have some seriously questionable defaults,
   had no way to add parsers, and seemed abandoned by its maintainer.
 * Needs more/better tests and docs.
