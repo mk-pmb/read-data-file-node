@@ -62,15 +62,28 @@ const defaultImpl = {
       return custom;
     },
 
-    findBestReaderAndParser(path) {
-      const { readersByFext, parsersByFext } = this;
+    parseFilenameDotParts(path, opt) {
+      const fmtOvr = opt.format;
+      if (fmtOvr) { return fmtOvr.split(/\./).reverse(); }
+      if (fmtOvr === undefined) {
+        const m = /^<fmt=([\w\.]+)>(?=[\S\s])/.exec(path);
+        if (m) {
+          const dp = m[1].split(/\./).reverse();
+          dp.realPath = path.slice(m[0].length);
+          return dp;
+        }
+      }
       const basename = pathLib.parse(path).base;
-      const dotParts = basename.split(/\./).slice(1).reverse();
+      return basename.split(/\./).slice(1).reverse();
+    },
+
+    findBestReaderAndParser(pathDotParts) {
+      const { readersByFext, parsersByFext } = this;
       // ^-- e.g. cats.json.rot13.gz -> [gz, rot13, json]
       let fext;
       let reader;
       let parser;
-      dotParts.forEach(function lookup(dotPart) {
+      pathDotParts.forEach(function lookup(dotPart) {
         fext = dotPart + (fext ? '.' + fext : '');
         if (reader === undefined) { reader = dlookup(readersByFext, fext); }
         if (parser === undefined) { parser = dlookup(parsersByFext, fext); }
@@ -93,11 +106,14 @@ const defaultImpl = {
       throw err;
     },
 
-    async readFile(path) {
-      const rop = this.findBestReaderAndParser(path);
-      if (!rop) { return this.unsupportedFext(path); }
+    async readFile(path, origOpt) {
+      const opt = { ...origOpt };
+      const dotParts = this.parseFilenameDotParts(path, opt);
+      const realPath = (dotParts.realPath || path);
+      const rop = this.findBestReaderAndParser(dotParts);
+      if (!rop) { return this.unsupportedFext(realPath); }
       const { reader, parser } = rop;
-      const content = await ifFun(reader, this.defaultReader)(path);
+      const content = await ifFun(reader, this.defaultReader)(realPath);
       const data = await ifFun(parser, identity)(content);
       return data;
     },
