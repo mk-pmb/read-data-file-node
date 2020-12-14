@@ -22,9 +22,11 @@ async function shouldReject(pr) {
 
 
 // ¦mjsUsageDemo¦+
+function toNativeObjects(x) { return JSON.parse(JSON.stringify(x)); }
+
 async function verifyOneFixture(filename, customRdf) {
   const data = await (customRdf || readDataFile)(addTestDirPath(filename));
-  equal(data, nativeCats);
+  equal.named(filename, () => equal(toNativeObjects(data), nativeCats));
   console.log('+OK correct data for', filename);
 }
 
@@ -39,8 +41,8 @@ async function verifyAllFixtures() {
   await verifyOneFixture('cats.yml');
 
   const noIni = readDataFile.cfg({ parsersByFext: { ini: false } });
-  await shouldReject(verifyOneFixture('cats.ini', noIni)).then(rej => {
-    equal(rej.name, 'ReadDataFileUnsupportedFext');
+  await shouldReject(verifyOneFixture('cats.ini', noIni)).then((rej) => {
+    equal.named('noIni', () => equal(rej.name, 'ReadDataFileUnsupportedFext'));
     console.log('+OK ini parser disabled');
   });
 }
