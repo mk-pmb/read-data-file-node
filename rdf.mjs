@@ -15,7 +15,7 @@ import iniLib from 'ini';
 import json5Lib from 'json5';
 import jsonParser from 'json-parse-pmb';
 import tomlLib from 'toml';
-import yamlLib from 'js-yaml';
+import yamlSafeLoad from 'safeload-yaml-pmb';
 
 
 function makeReaderFunc() {
@@ -43,7 +43,7 @@ const defaultImpl = {
     json: jsonParser,
     json5(data) { return json5Lib.parse(data); },
     toml(data) { return tomlLib.parse(data); },
-    yaml(data) { return yamlLib.safeLoad(data); },
+    yaml(data) { return yamlSafeLoad(data); },
     yml: 'yaml',
   },
 

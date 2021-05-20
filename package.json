@@ -1,5 +1,5 @@
 { "name": "read-data-file",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Read data/config files in various formats (parsers list is configurable).",
   "keywords": [
     "read data file",
@@ -31,21 +31,21 @@
     "if-fun": "^1.0.0",
     "ini": "^1.3.5",
     "is-string": "^1.0.4",
-    "js-yaml": "^3.12.1",
     "json-parse-pmb": "^1.0.0",
     "json5": "^2.1.3",
     "map-assoc-core": "^0.1.3",
     "merge-options": "^1.0.1",
     "nofs": "^0.12.2",
+    "safeload-yaml-pmb": "^4.210519.0",
     "strip-bom": "^4.0.0",
     "toml": "^3.0.0"
   },
   "devDependencies": {
     "absdir": "^1.0.6",
     "equal-pmb": "^0.1.24",
-    "nodemjs": "^0.1.8",
+    "nodemjs": "^0.1.9",
     "p-fatal": "^0.1.3",
-    "usnam-pmb": "^0.2.4"
+    "usnam-pmb": "^0.2.5"
   },
 
 
