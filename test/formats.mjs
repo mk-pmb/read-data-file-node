@@ -7,10 +7,8 @@ import pEachSeries from 'p-each-series';
 import promisedFs from 'nofs';
 import vTry from 'vtry';
 
-// ¦mjsUsageDemo¦+
 import readDataFile from '../rdf.mjs';
-import nativeCats from './cats.json';
-// ¦mjsUsageDemo¦- importPkgName
+import nativeCats from './fixtures/cats/cats.json';
 
 const testDirPath = absdir(import.meta, '.');
 
@@ -34,7 +32,6 @@ const brokenFexts = [
 ];
 
 
-// ¦mjsUsageDemo¦+
 function verifyOneFixture(filename) {
   const broken = brokenFexts.reduce(function check(yes, fext) {
     if (yes) { return yes; }
@@ -63,7 +60,7 @@ function verifyOneFixture(filename) {
 }
 
 async function verifyAllFixtures() {
-  const allCatsFiles = await testDirGlob('cats.*');
+  const allCatsFiles = await testDirGlob('fixtures/cats/cats.*');
   equal(allCatsFiles.length, 11);
   await pEachSeries(allCatsFiles.sort(), verifyOneFixture);
 
@@ -77,10 +74,9 @@ async function verifyAllFixtures() {
     // console.log('+OK ini parser disabled');
   });
 }
-// ¦mjsUsageDemo¦-
 
 
 
 
 
-verifyAllFixtures().then(() => console.info('+OK usage test passed.'));
+verifyAllFixtures().then(() => console.info('+OK formats test passed.'));
