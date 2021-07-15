@@ -12,7 +12,7 @@ Read data/config files in various formats (parsers list is configurable).
 Usage
 -----
 
-see [test/usage.mjs](test/usage.mjs)
+:TODO:
 
 
 
