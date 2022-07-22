@@ -5,7 +5,7 @@ import equal from 'equal-pmb';
 import absdir from 'absdir';
 
 // ¦mjsUsageDemo¦+
-import readDataFile from '..';
+import readDataFile from '../rdf.mjs';
 import nativeCats from './cats.json';
 // ¦mjsUsageDemo¦- importPkgName
 

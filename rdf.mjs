@@ -10,7 +10,7 @@ import mergeOpts from 'merge-options';
 import promisedFs from 'nofs';
 import stripBom from 'strip-bom';
 
-import cesonParser from 'ceson/parse';
+import cesonParser from 'ceson/parse.js';
 import iniLib from 'ini';
 import json5Lib from 'json5';
 import jsonParser from 'json-parse-pmb';

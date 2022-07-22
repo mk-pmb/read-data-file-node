@@ -1,1 +1,2 @@
-﻿require('esmod-pmb')(module);
+﻿'use strict';
+require('esmod-pmb')(module);
