@@ -77,6 +77,13 @@ see [test/usage.js](test/usage.js)
 <!--#toc stop="scan" -->
 
 
+Compatibility
+-------------
+
+* If you need ancient versions of Node.js (older than 14.x),
+  stay with `read-data-file` v2.x.
+
+
 
 Known issues
 ------------

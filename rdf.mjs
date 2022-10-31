@@ -1,13 +1,14 @@
 // -*- coding: utf-8, tab-width: 2 -*-
 
 import pathLib from 'path';
+import nodeFs from 'fs';
+import pify from 'pify';
 
 import getOwn from 'getown';
 import ifFun from 'if-fun';
 import isStr from 'is-string';
 import mapObj from 'map-assoc-core';
 import mergeOpts from 'merge-options';
-import promisedFs from 'nofs';
 import stripBom from 'strip-bom';
 
 import cesonParser from 'ceson/parse.js';
@@ -93,7 +94,7 @@ const defaultImpl = {
     },
 
     async defaultReader(path) {
-      const text = stripBom(await promisedFs.readFile(path,
+      const text = stripBom(await pify(nodeFs.readFile)(path,
         { encoding: 'UTF-8' }));
       return text;
     },
