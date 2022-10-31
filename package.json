@@ -1,5 +1,5 @@
 { "name": "read-data-file",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Read data/config files in various formats (parsers list is configurable).",
   "keywords": [
     "read data file",
@@ -32,7 +32,7 @@
     "esmod-pmb": "^0.1.13",
     "getown": "^1.0.0",
     "if-fun": "^1.0.1",
-    "ini": "^3.0.1",
+    "ini": "^2.0.0",
     "is-string": "^1.0.7",
     "json-parse-pmb": "^1.0.0",
     "json5": "^2.2.1",
