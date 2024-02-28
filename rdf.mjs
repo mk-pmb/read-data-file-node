@@ -114,9 +114,15 @@ const defaultImpl = {
       const rop = this.findBestReaderAndParser(dotParts);
       if (!rop) { return this.unsupportedFext(realPath); }
       const { reader, parser } = rop;
-      const content = await ifFun(reader, this.defaultReader)(realPath);
-      const data = await ifFun(parser, identity)(content);
-      return data;
+      try {
+        const content = await ifFun(reader, this.defaultReader)(realPath);
+        const data = await ifFun(parser, identity)(content);
+        return data;
+      } catch (err) {
+        err.dataFilePath = path;
+        err.message += ' — Error occurred while trying to read file ' + path;
+        throw err;
+      }
     },
 
   },
