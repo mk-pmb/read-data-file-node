@@ -2,13 +2,13 @@
 
 import pathLib from 'path';
 import nodeFs from 'fs';
-import pify from 'pify';
 
 import getOwn from 'getown';
 import ifFun from 'if-fun';
 import isStr from 'is-string';
 import mapObj from 'map-assoc-core';
 import mergeOpts from 'merge-options';
+import pify from 'pify';
 import stripBom from 'strip-bom';
 
 import cesonParser from 'ceson/parse.js';
