@@ -35,8 +35,10 @@ async function verifyAllFixtures() {
 
   await verifyOneFixture('cats.ceson');
   await verifyOneFixture('cats.ini');
+  await verifyOneFixture('cats.json.gz');
   await verifyOneFixture('cats.json5');
   await verifyOneFixture('cats.toml');
+  await verifyOneFixture('cats.yaml.gz');
   await verifyOneFixture('cats.yaml');
   await verifyOneFixture('cats.yml');
 

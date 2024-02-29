@@ -1,7 +1,8 @@
 // -*- coding: utf-8, tab-width: 2 -*-
 
-import pathLib from 'path';
 import nodeFs from 'fs';
+import pathLib from 'path';
+import zlib from 'zlib';
 
 import getOwn from 'getown';
 import ifFun from 'if-fun';
@@ -17,6 +18,10 @@ import json5Lib from 'json5';
 import jsonParser from 'json-parse-pmb';
 import tomlLib from 'toml';
 import yamlSafeLoad from 'safeload-yaml-pmb';
+
+
+const readRawFilePr = pify(nodeFs.readFile);
+const decodeGzipBuffer = pify(zlib.gunzip);
 
 
 function makeReaderFunc() {
@@ -35,6 +40,15 @@ function dlookup(dict, key) {
 function identity(x) { return x; }
 
 
+async function readGzippedUtf8(path) {
+  let d = await readRawFilePr(path);
+  d = await decodeGzipBuffer(d);
+  d = String(d);
+  d = stripBom(d);
+  return d;
+}
+
+
 const defaultImpl = {
 
   // #BEGIN# default opts
@@ -50,6 +64,7 @@ const defaultImpl = {
 
   readersByFext: {
     // qar(path) { return this.readFile(path + '.meta.json'); },
+    gz: readGzippedUtf8,
   },
   // #ENDOF# default opts
 
@@ -86,16 +101,15 @@ const defaultImpl = {
       let parser;
       pathDotParts.forEach(function lookup(dotPart) {
         fext = dotPart + (fext ? '.' + fext : '');
-        if (reader === undefined) { reader = dlookup(readersByFext, fext); }
-        if (parser === undefined) { parser = dlookup(parsersByFext, fext); }
+        if (reader === undefined) { reader = dlookup(readersByFext, dotPart); }
+        if (parser === undefined) { parser = dlookup(parsersByFext, dotPart); }
       });
       if (reader || parser) { return { reader, parser }; }
       return false;
     },
 
     async defaultReader(path) {
-      const text = stripBom(await pify(nodeFs.readFile)(path,
-        { encoding: 'UTF-8' }));
+      const text = stripBom(await readRawFilePr(path, { encoding: 'UTF-8' }));
       return text;
     },
 

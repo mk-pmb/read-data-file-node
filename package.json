@@ -1,5 +1,5 @@
 { "name": "read-data-file",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Read data/config files in various formats (parsers list is configurable).",
   "keywords": [
     "read data file",
