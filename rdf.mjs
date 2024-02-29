@@ -134,7 +134,8 @@ const defaultImpl = {
         return data;
       } catch (err) {
         err.dataFilePath = path;
-        err.message += ' — Error occurred while trying to read file ' + path;
+        const trace = 'While reading file ' + JSON.stringify(path) + ': ';
+        err.message = trace + err.message;
         throw err;
       }
     },
