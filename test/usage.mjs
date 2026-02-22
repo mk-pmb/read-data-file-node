@@ -6,7 +6,7 @@ import absdir from 'absdir';
 
 // ¦mjsUsageDemo¦+
 import readDataFile from '../rdf.mjs';
-import nativeCats from './cats.json';
+import nativeCats from './cats.json' with { type: 'json' };
 // ¦mjsUsageDemo¦- importPkgName
 
 const addTestDirPath = absdir(import.meta, '.');
