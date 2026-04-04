@@ -1,5 +1,5 @@
 { "name": "read-data-file",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Read data/config files in various formats (parsers list is configurable).",
   "keywords": [
     "read data file",
@@ -29,7 +29,6 @@
 
   "dependencies": {
     "ceson": "^0.1.5",
-    "esmod-pmb": "^0.1.14",
     "getown": "^1.0.1",
     "if-fun": "^1.0.1",
     "ini": "^6.0.0",
