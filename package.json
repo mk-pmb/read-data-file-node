@@ -1,5 +1,5 @@
 { "name": "read-data-file",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Read data/config files in various formats (parsers list is configurable).",
   "keywords": [
     "read data file",
@@ -23,7 +23,7 @@
     "datafile2json": "bin/df2json.mjs"
   },
 
-  "scripts": { "test": "elp && nodemjs test/all.mjs" },
+  "scripts": { "test": "elp && nodejs test/all.mjs" },
   "directories": { "test": "test" },
   "eslintConfig": { "extends": "nodejs-pmb" },
 
@@ -51,8 +51,7 @@
     "eslint-config-nodejs-pmb": "^0.3.13",
     "eslint-plugin-json-light-pmb": "^1.0.7",
     "eslint-plugin-n": "^17.16.2",
-    "eslint-pretty-pmb": "^1.0.7",
-    "nodemjs": "^0.1.17"
+    "eslint-pretty-pmb": "^1.0.7"
   },
 
 
