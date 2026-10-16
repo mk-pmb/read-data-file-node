@@ -38,14 +38,27 @@ function dlookup(dict, key) {
 
 
 function identity(x) { return x; }
+function cleanStr(x) { return stripBom(String(x || '')); }
 
 
 async function readGzippedUtf8(path) {
   let d = await readRawFilePr(path);
   d = await decodeGzipBuffer(d);
-  d = String(d);
-  d = stripBom(d);
+  d = cleanStr(d);
   return d;
+}
+
+
+function ndJsonParser(orig) {
+  let l = '[' + cleanStr(orig).trim() + ']';
+  /* We honor robustness principle, so we need to tolerate empty lines
+    and concatenated multi-line objects. Which mostly means we must
+    insert comma only where there would otherwise be a syntax error. */
+  l = l.replace(/([\x5D\}\w\"\.])(\s*?[\r\n]\s*[\x5B\{\w"\.\+\-])/g, '$1,$2');
+  /* In pure JSON, a number cannot start with plus or decimal point,
+    and cannot end with decimal point. They're there in case we upgrade
+    to a non-standard extra-lenient JSON parser. */
+  return jsonParser(l);
 }
 
 
@@ -57,6 +70,8 @@ const defaultImpl = {
     ini(data) { return iniLib.parse(data); },
     json: jsonParser,
     json5(data) { return json5Lib.parse(data); },
+    jsonl: ndJsonParser,
+    ndjson: ndJsonParser,
     toml(data) { return tomlLib.parse(data); },
     yaml(data) { return yamlSafeLoad(data); },
     yml: 'yaml',
@@ -109,7 +124,7 @@ const defaultImpl = {
     },
 
     async defaultReader(path) {
-      const text = stripBom(await readRawFilePr(path, { encoding: 'UTF-8' }));
+      const text = cleanStr(await readRawFilePr(path, { encoding: 'UTF-8' }));
       return text;
     },
 
