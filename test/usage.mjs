@@ -24,26 +24,36 @@ async function shouldReject(pr) {
 // ¦mjsUsageDemo¦+
 function toNativeObjects(x) { return JSON.parse(JSON.stringify(x)); }
 
-async function verifyOneFixture(filename, customRdf) {
+async function verifyOneFixture(expected, filename, customRdf) {
   const data = await (customRdf || readDataFile)(addTestDirPath(filename));
-  equal.named(filename, () => equal(toNativeObjects(data), nativeCats));
+  equal.named(filename, () => equal(toNativeObjects(data), expected));
   console.log('+OK correct data for', filename);
 }
 
-async function verifyAllFixtures() {
-  await verifyOneFixture('cats.json');
+function dictToList(keyKey, dict) {
+  return Object.keys(dict).sort().map(k => ({ [keyKey]: k, ...dict[k] }));
+}
 
-  await verifyOneFixture('cats.ceson');
-  await verifyOneFixture('cats.ini');
-  await verifyOneFixture('cats.json.gz');
-  await verifyOneFixture('cats.json5');
-  await verifyOneFixture('cats.toml');
-  await verifyOneFixture('cats.yaml.gz');
-  await verifyOneFixture('cats.yaml');
-  await verifyOneFixture('cats.yml');
+async function verifyAllFixtures() {
+  const verifyCatsDict = verifyOneFixture.bind(null, nativeCats);
+  await verifyCatsDict('cats.json');
+
+  await verifyCatsDict('cats.ceson');
+  await verifyCatsDict('cats.ini');
+  await verifyCatsDict('cats.json.gz');
+  await verifyCatsDict('cats.json5');
+  await verifyCatsDict('cats.toml');
+  await verifyCatsDict('cats.yaml.gz');
+  await verifyCatsDict('cats.yaml');
+  await verifyCatsDict('cats.yml');
+
+  const verifyCatsList = verifyOneFixture.bind(null,
+    dictToList('name', nativeCats));
+  await verifyCatsList('cats.jsonl');
+  await verifyCatsList('cats.ndjson');
 
   const noIni = readDataFile.cfg({ parsersByFext: { ini: false } });
-  await shouldReject(verifyOneFixture('cats.ini', noIni)).then((rej) => {
+  await shouldReject(verifyCatsDict('cats.ini', noIni)).then((rej) => {
     equal.named('noIni', () => equal(rej.name, 'ReadDataFileUnsupportedFext'));
     console.log('+OK ini parser disabled');
   });
